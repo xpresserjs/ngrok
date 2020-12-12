@@ -14,7 +14,7 @@ export = {
                     url = data.url;
 
                     // Save to store
-                    $.engineData.set('ngrok', data);
+                    $.store.set('ngrok', data);
                 }
 
                 // Set on boot event.
