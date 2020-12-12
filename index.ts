@@ -4,6 +4,7 @@ export = {
     run() {
         // Run if not console.
         $.ifNotConsole(() => {
+            const modifyServerSettings = pluginConfig.get('modifyServerSettings', true);
             // Check if plugin is enabled
             if (pluginConfig.get("enabled")) {
                 const logPath = $.path.frameworkStorageFolder('ngrok.json');
@@ -20,7 +21,7 @@ export = {
                 // Set on boot event.
                 $.on.boot(next => {
                     // Check modifyServerSettings is enabled
-                    if (pluginConfig.get("modifyServerSettings")) {
+                    if (modifyServerSettings) {
                         // Modify server settings
                         $.config.path("server").set({
                             protocol: "https", // project to https
@@ -38,7 +39,7 @@ export = {
                     return next();
                 });
 
-                if (url) {
+                if (url && !modifyServerSettings) {
                     $.on.serverBooted(next => {
                         // Log url
                         $.logInfo(`Ngrok Url: ${url}`);
