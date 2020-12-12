@@ -16,10 +16,10 @@ export = ($: DollarSign): thisConfig => ({
     /**
      * If disabled no xjs commands will run.
      */
-    enabled: true,
+    enabled: false,
 
     /**
-     * If enabled xpresser server config will set {server.domain} to ngrok domain.
+     * If enabled config {server.domain} will be set to ngrok domain.
      */
     modifyServerSettings: true,
 
