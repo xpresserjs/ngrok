@@ -1,6 +1,6 @@
 {
   "name": "@xpresser/ngrok",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Add Ngrok support to your xpresser app.",
   "main": "index.ts",
   "types": "types/index.d.ts",
