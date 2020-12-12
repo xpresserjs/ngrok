@@ -1,6 +1,6 @@
 [
   {
-    "command": "ngrok",
+    "command": "ngrok [config]",
     "description": "Start ngrok server.",
     "file": "StartNgrok.js"
   },
