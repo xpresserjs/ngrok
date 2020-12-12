@@ -16,7 +16,7 @@ export = ($: DollarSign): thisConfig => ({
     /**
      * If disabled no xjs commands will run.
      */
-    enabled: false,
+    enabled: $.config.get('server.use.ngrok', false),
 
     /**
      * If enabled config {server.domain} will be set to ngrok domain.
