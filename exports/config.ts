@@ -4,6 +4,7 @@ import type {INgrokOptions} from "ngrok";
 // This Configuration Interface
 interface thisConfig {
     enabled: boolean
+    modifyServerSettings: boolean
     config: Record<string, INgrokOptions>,
     ifEnabled: (next: () => any) => any
 }
@@ -16,6 +17,11 @@ export = ($: DollarSign): thisConfig => ({
      * If disabled no xjs commands will run.
      */
     enabled: true,
+
+    /**
+     * If enabled xpresser server config will set {server.domain} to ngrok domain.
+     */
+    modifyServerSettings: true,
 
     /**
      * Your ngrok configurations.

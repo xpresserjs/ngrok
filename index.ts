@@ -19,10 +19,22 @@ export = {
 
                 // Set on boot event.
                 $.on.boot(next => {
+                    // Check modifyServerSettings is enabled
+                    if (pluginConfig.get("modifyServerSettings")) {
+                        // Modify server settings
+                        $.config.path("server").set({
+                            protocol: "https", // project to https
+                            includePortInUrl: false, // remove port form url
+                            domain: $.store.get("ngrok.domain") // set domain
+                        });
+                    }
+
+                    // Run if enabled
                     if (pluginConfig.has("ifEnabled")) {
                         return (pluginConfig.all() as { ifEnabled: (next: any) => void })
                             .ifEnabled(next);
                     }
+
                     return next();
                 });
 
