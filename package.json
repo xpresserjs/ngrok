@@ -20,5 +20,10 @@
   "dependencies": {
     "ngrok": "^3.3.0",
     "@xpresser/plugin-tools": "^1.0.0"
-  }
+  },
+  "keywords": [
+    "xpresser",
+    "ngrok",
+    "plugin"
+  ]
 }
