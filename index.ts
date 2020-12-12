@@ -4,9 +4,9 @@ export = {
     run() {
         // Run if not console.
         $.ifNotConsole(() => {
-            const modifyServerSettings = pluginConfig.get('modifyServerSettings', true);
             // Check if plugin is enabled
             if (pluginConfig.get("enabled")) {
+                const modifyServerSettings = pluginConfig.get('modifyServerSettings', true);
                 const logPath = $.path.frameworkStorageFolder('ngrok.json');
                 let url!: string;
 
@@ -16,10 +16,7 @@ export = {
 
                     // Save to store
                     $.store.set('ngrok', data);
-                }
 
-                // Set on boot event.
-                $.on.boot(next => {
                     // Check modifyServerSettings is enabled
                     if (modifyServerSettings) {
                         // Modify server settings
@@ -29,7 +26,10 @@ export = {
                             domain: $.store.get("ngrok.domain") // set domain
                         });
                     }
+                }
 
+                // Set on boot event.
+                $.on.boot(next => {
                     // Run if enabled
                     if (pluginConfig.has("ifEnabled")) {
                         return (pluginConfig.all() as { ifEnabled: (next: any) => void })
