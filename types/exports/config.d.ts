@@ -1,12 +1,12 @@
 import type { DollarSign } from "xpresser/types";
 import type { INgrokOptions } from "ngrok";
-interface thisConfig {
+declare interface XpresserNgrokConfig {
     enabled: boolean;
     modifyServerSettings: boolean;
     config: Record<string, INgrokOptions>;
     ifEnabled: (next: () => any) => any;
 }
-declare const _default: ($: DollarSign) => thisConfig;
+declare const _default: ($: DollarSign) => XpresserNgrokConfig;
 /**
  *  @param {Xpresser.DollarSign} $
  */

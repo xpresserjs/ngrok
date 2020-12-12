@@ -1,7 +1,7 @@
 {
   "name": "@xpresser/ngrok",
   "version": "1.0.10",
-  "description": "Add Ngrok support to your xpresser app.",
+  "description": "Add Ngrok support to your xpresser project.",
   "main": "index.ts",
   "types": "types/index.d.ts",
   "repository": "https://github.com/xpresserjs/ngrok",

@@ -6,10 +6,17 @@ export = {
         $.ifNotConsole(() => {
             // Check if plugin is enabled
             if (pluginConfig.get("enabled")) {
+
                 const modifyServerSettings = pluginConfig.get('modifyServerSettings', true);
+
+                // Get ngrok.json from framework folder
                 const logPath = $.path.frameworkStorageFolder('ngrok.json');
                 let url!: string;
 
+                /**
+                 * If log Path exists, update it.
+                 * Also set `ngrok` to $.store
+                 */
                 if ($.file.exists(logPath)) {
                     const data = require(logPath);
                     url = data.url;
@@ -39,12 +46,22 @@ export = {
                     return next();
                 });
 
-                if (url && !modifyServerSettings) {
-                    $.on.serverBooted(next => {
-                        // Log url
-                        $.logInfo(`Ngrok Url: ${url}`);
-                        return next();
-                    })
+
+                if (url) {
+                    if (modifyServerSettings) {
+                        $.on.bootServer(next => {
+                            // Log url
+                            $.logInfo(`Using Ngrok domain.`);
+                            return next();
+                        })
+                    } else {
+                        $.on.serverBooted(next => {
+                            // Log url
+                            $.logInfo(`Ngrok Url: ${url}`);
+                            return next();
+                        })
+                    }
+
                 }
 
             }

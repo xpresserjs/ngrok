@@ -2,7 +2,7 @@ import type {DollarSign} from "xpresser/types";
 import type {INgrokOptions} from "ngrok";
 
 // This Configuration Interface
-interface thisConfig {
+declare interface XpresserNgrokConfig {
     enabled: boolean
     modifyServerSettings: boolean
     config: Record<string, INgrokOptions>,
@@ -12,7 +12,7 @@ interface thisConfig {
 /**
  *  @param {Xpresser.DollarSign} $
  */
-export = ($: DollarSign): thisConfig => ({
+export = ($: DollarSign): XpresserNgrokConfig => ({
     /**
      * If disabled no xjs commands will run.
      */
@@ -28,7 +28,7 @@ export = ($: DollarSign): thisConfig => ({
      * **default** is used when no config is specified when running xjs-cli command
      *
      * See full config options
-     * [ngrok](https://npmjs.org/package/ngrok)
+     * https://xpresserjs.com/plugins/@xpresser/ngrok.html#using-custom-ngrok-config
      *
      * @example
      * xjs ngrok // {config.default}
