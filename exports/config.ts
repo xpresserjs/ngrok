@@ -8,6 +8,9 @@ interface thisConfig {
     ifEnabled: (next: () => any) => any
 }
 
+/**
+ *  @param {Xpresser.DollarSign} $
+ */
 export = ($: DollarSign): thisConfig => ({
     /**
      * If disabled no xjs commands will run.

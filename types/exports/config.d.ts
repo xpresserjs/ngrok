@@ -6,4 +6,7 @@ interface thisConfig {
     ifEnabled: (next: () => any) => any;
 }
 declare const _default: ($: DollarSign) => thisConfig;
+/**
+ *  @param {Xpresser.DollarSign} $
+ */
 export = _default;

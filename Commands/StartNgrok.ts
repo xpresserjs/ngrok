@@ -20,6 +20,7 @@ export = async ([config = "default"]) => {
 
     // Require Ngrok
     const url = await ngrok.connect(ngrokConfig);
+    let domain = url.replace('https://', '');
 
     /**
      * Save url to ngrok.json in framework storage folder.
@@ -28,7 +29,7 @@ export = async ([config = "default"]) => {
     $.file.makeDirIfNotExist(logPath, true);
 
     // Save to ngrok.json.
-    $.file.saveToJson(logPath, {config, url, date: new Date()}, {checkIfFileExists: false});
+    $.file.saveToJson(logPath, {config, url, domain, date: new Date()}, {checkIfFileExists: false});
 
     $.logSuccess('Ngrok.io connected successfully.')
     $.logInfo(`Url: ${url}`);
