@@ -32,5 +32,5 @@ export = async ([config = "default"]) => {
 
     $.logSuccess('Ngrok.io connected successfully.')
     $.logInfo(`Url: ${url}`);
-    $.logWarning('Reload your xpresser server.')
+    $.log('Reload your xpresser server.');
 };

@@ -6,6 +6,17 @@ export = {
         $.ifNotConsole(() => {
             // Check if plugin is enabled
             if (pluginConfig.get("enabled")) {
+                const logPath = $.path.frameworkStorageFolder('ngrok.json');
+                let url!: string;
+
+                if ($.file.exists(logPath)) {
+                    const data = require(logPath);
+                    url = data.url;
+
+                    // Save to store
+                    $.engineData.set('ngrok', data);
+                }
+
                 // Set on boot event.
                 $.on.boot(next => {
                     if (pluginConfig.has("ifEnabled")) {
@@ -15,16 +26,14 @@ export = {
                     return next();
                 });
 
-                $.on.serverBooted(next => {
-                    const logPath = $.path.frameworkStorageFolder('ngrok.json');
-                    if ($.file.exists(logPath)) {
-                        const data = require(logPath);
-                        if (data.url) {
-                            $.logInfo(`Ngrok Url: ${data.url}`);
-                        }
-                    }
-                    return next();
-                })
+                if (url) {
+                    $.on.serverBooted(next => {
+                        // Log url
+                        $.logInfo(`Ngrok Url: ${url}`);
+                        return next();
+                    })
+                }
+
             }
         });
     }
