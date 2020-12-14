@@ -19,7 +19,13 @@ export = async ([config = "default"]) => {
     if (!ngrokConfig) return $.logErrorAndExit(`No config with name: ${config}`);
 
     // Require Ngrok
-    const url = await ngrok.connect(ngrokConfig);
+    let url;
+    try {
+        url = await ngrok.connect(ngrokConfig);
+    } catch (e) {
+        return $.logErrorAndExit(e.message);
+    }
+
     let domain = url.replace('https://', '');
 
     /**
