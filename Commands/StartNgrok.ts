@@ -23,7 +23,7 @@ export = async ([config = "default"]) => {
     try {
         url = await ngrok.connect(ngrokConfig);
     } catch (e) {
-        return $.logErrorAndExit(e.message);
+        return $.logErrorAndExit(e.message? e.message : "Error starting ngrok server, something wrong occurred!");
     }
 
     let domain = url.replace('https://', '');
