@@ -4,4 +4,4 @@
 
 
 Add Ngrok support to your xpresser project.
-Documentation: [xpresserjs.com](https://xpresserjs.com/plugins/@xpresser/ng§rok.html)
+Documentation: [xpresserjs.com](https://xpresserjs.com/plugins/@xpresser/ngrok.html)
