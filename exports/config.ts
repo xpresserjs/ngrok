@@ -1,12 +1,12 @@
-import type {DollarSign} from "xpresser/types";
-import type {INgrokOptions} from "ngrok";
+import type { DollarSign } from "xpresser/types";
+import type { Ngrok } from "ngrok";
 
 // This Configuration Interface
 declare interface XpresserNgrokConfig {
-    enabled: boolean
-    modifyServerSettings: boolean
-    config: Record<string, INgrokOptions>,
-    ifEnabled: (next: () => any) => any
+    enabled: boolean;
+    modifyServerSettings: boolean;
+    config: Record<string, Ngrok.Options>;
+    ifEnabled: (next: () => any) => any;
 }
 
 /**
@@ -16,7 +16,7 @@ export = ($: DollarSign): XpresserNgrokConfig => ({
     /**
      * If disabled no xjs commands will run.
      */
-    enabled: $.config.get('server.use.ngrok', false),
+    enabled: $.config.get("server.use.ngrok", false),
 
     /**
      * If enabled config {server.domain} will be set to ngrok domain.
@@ -36,13 +36,13 @@ export = ($: DollarSign): XpresserNgrokConfig => ({
      */
     config: {
         default: {
-            port: $.config.get("server.port"),
+            port: $.config.get("server.port")
         }
     },
 
     /**
      * Do stuff if ngrok is enabled.
-     * This function runs on a $.on.boot event
+     * This function runs as an $.on.boot event
      */
     ifEnabled(next) {
         // Resume boot.

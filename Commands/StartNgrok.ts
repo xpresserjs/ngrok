@@ -1,18 +1,15 @@
 // Import Configurations
-import {pluginConfig, $} from "../plugin-config";
+import { pluginConfig, $ } from "../plugin-config";
 // import ngrok
 import ngrok = require("ngrok");
-
 
 /**
  * Start Ngrok.
  * This function runs when ever you run `xjs cli`
  */
 export = async ([config = "default"]) => {
-
     // Check if enabled
-    if (!pluginConfig.get('enabled'))
-        return $.logAndExit("Ngrok plugin is not enabled!");
+    if (!pluginConfig.get("enabled")) return $.logAndExit("Ngrok plugin is not enabled!");
 
     // Get required config
     const ngrokConfig = pluginConfig.get(`config.${config}`);
@@ -23,21 +20,29 @@ export = async ([config = "default"]) => {
     try {
         url = await ngrok.connect(ngrokConfig);
     } catch (e) {
-        return $.logErrorAndExit(e.message? e.message : "Error starting ngrok server, something wrong occurred!");
+        return $.logErrorAndExit(
+            e.message
+                ? e.message
+                : "Error starting ngrok server, something wrong occurred!"
+        );
     }
 
-    let domain = url.replace('https://', '');
+    let domain = url.replace("https://", "");
 
     /**
      * Save url to ngrok.json in framework storage folder.
      */
-    const logPath = $.path.frameworkStorageFolder('ngrok.json');
+    const logPath = $.path.frameworkStorageFolder("ngrok.json");
     $.file.makeDirIfNotExist(logPath, true);
 
     // Save to ngrok.json.
-    $.file.saveToJson(logPath, {config, url, domain, date: new Date()}, {checkIfFileExists: false});
+    $.file.saveToJson(
+        logPath,
+        { config, url, domain, date: new Date() },
+        { checkIfFileExists: false }
+    );
 
-    $.logSuccess('Ngrok.io connected successfully.')
+    $.logSuccess("Ngrok.io connected successfully.");
     $.logInfo(`Url: ${url}`);
-    $.log('Reload your xpresser server.');
+    $.log("Reload your xpresser server.");
 };

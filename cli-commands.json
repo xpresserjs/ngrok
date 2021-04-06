@@ -4,7 +4,6 @@
     "description": "Start ngrok server.",
     "file": "StartNgrok.js"
   },
-
   {
     "command": "ngrok-update",
     "description": "Update ngrok binaries.",

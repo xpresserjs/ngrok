@@ -1,16 +1,19 @@
-import {pluginConfig, $} from "./plugin-config";
+import { pluginConfig, $ } from "./plugin-config";
+import type { DollarSign } from "xpresser/types";
 
 export = {
-    run() {
+    run(aboutPlugin: any, $: DollarSign) {
         // Run if not console.
         $.ifNotConsole(() => {
             // Check if plugin is enabled
             if (pluginConfig.get("enabled")) {
-
-                const modifyServerSettings = pluginConfig.get('modifyServerSettings', true);
+                const modifyServerSettings = pluginConfig.get(
+                    "modifyServerSettings",
+                    true
+                );
 
                 // Get ngrok.json from framework folder
-                const logPath = $.path.frameworkStorageFolder('ngrok.json');
+                const logPath = $.path.frameworkStorageFolder("ngrok.json");
                 let url!: string;
 
                 /**
@@ -22,7 +25,7 @@ export = {
                     url = data.url;
 
                     // Save to store
-                    $.store.set('ngrok', data);
+                    $.store.set("ngrok", data);
 
                     // Check modifyServerSettings is enabled
                     if (modifyServerSettings) {
@@ -36,34 +39,32 @@ export = {
                 }
 
                 // Set on boot event.
-                $.on.boot(next => {
+                $.on.boot((next) => {
                     // Run if enabled
                     if (pluginConfig.has("ifEnabled")) {
-                        return (pluginConfig.all() as { ifEnabled: (next: any) => void })
-                            .ifEnabled(next);
+                        return (pluginConfig.all() as {
+                            ifEnabled: (next: any) => void;
+                        }).ifEnabled(next);
                     }
 
                     return next();
                 });
 
-
                 if (url) {
                     if (modifyServerSettings) {
-                        $.on.bootServer(next => {
+                        $.on.bootServer((next) => {
                             // Log url
                             $.logInfo(`Using Ngrok domain.`);
                             return next();
-                        })
+                        });
                     } else {
-                        $.on.serverBooted(next => {
+                        $.on.serverBooted((next) => {
                             // Log url
                             $.logInfo(`Ngrok Url: ${url}`);
                             return next();
-                        })
+                        });
                     }
-
                 }
-
             }
         });
     }
