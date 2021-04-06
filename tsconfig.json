@@ -17,7 +17,7 @@
     // "jsx": "preserve",                     /* Specify JSX code generation: 'preserve', 'react-native', or 'react'. */
     "declaration": true,
     /* Generates corresponding '.d.ts' file. */
-    "declarationDir": "types",
+    "declarationDir": "dist",
     /* Generates corresponding '.d.ts' file. */
     // "declarationMap": true,                /* Generates a sourcemap for each corresponding '.d.ts' file. */
     // "sourceMap": true,                     /* Generates corresponding '.map' file. */
@@ -89,7 +89,6 @@
     /* Disallow inconsistently-cased references to the same file. */
   },
   "exclude": [
-    "types",
     "dist"
   ]
 }

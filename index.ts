@@ -1,8 +1,10 @@
-import { pluginConfig, $ } from "./plugin-config";
+import Plugin from "./plugin-config";
 import type { DollarSign } from "xpresser/types";
 
 export = {
     run(aboutPlugin: any, $: DollarSign) {
+        const { pluginConfig } = Plugin;
+
         // Run if not console.
         $.ifNotConsole(() => {
             // Check if plugin is enabled

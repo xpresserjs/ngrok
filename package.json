@@ -2,13 +2,14 @@
   "name": "@xpresser/ngrok",
   "version": "2.0.0",
   "description": "Add Ngrok support to your xpresser project.",
-  "main": "index.ts",
-  "types": "types/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "repository": "https://github.com/xpresserjs/ngrok",
   "author": "xpresserjs",
   "license": "MIT",
   "scripts": {
     "ts:build": "tsc -p tsconfig.json",
+    "ts:watch": "tsc --watch -p tsconfig.json",
     "prepare": "npm run ts:build"
   },
   "private": false,

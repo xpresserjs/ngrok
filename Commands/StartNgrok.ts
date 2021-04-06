@@ -1,5 +1,5 @@
 // Import Configurations
-import { pluginConfig, $ } from "../plugin-config";
+import Plugin from "../plugin-config";
 // import ngrok
 import ngrok = require("ngrok");
 
@@ -8,8 +8,11 @@ import ngrok = require("ngrok");
  * This function runs when ever you run `xjs cli`
  */
 export = async ([config = "default"]) => {
+    const { pluginConfig, $ } = Plugin;
+
     // Check if enabled
-    if (!pluginConfig.get("enabled")) return $.logAndExit("Ngrok plugin is not enabled!");
+    if (!Plugin.pluginConfig.get("enabled"))
+        return $.logAndExit("Ngrok plugin is not enabled!");
 
     // Get required config
     const ngrokConfig = pluginConfig.get(`config.${config}`);
