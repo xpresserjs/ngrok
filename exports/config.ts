@@ -7,6 +7,7 @@ declare interface XpresserNgrokConfig {
     modifyServerSettings: boolean;
     config: Record<string, Ngrok.Options>;
     ifEnabled: (next: () => any) => any;
+    pingServer: { enabled: boolean; port: number };
 }
 
 /**
@@ -47,5 +48,11 @@ export = ($: DollarSign): XpresserNgrokConfig => ({
     ifEnabled(next) {
         // Resume boot.
         return next();
-    }
+    },
+
+    /**
+     * Ping Server
+     * The ping server tells xpresser that your ngrok instance is alive.
+     */
+    pingServer: { enabled: true, port: 9991 }
 });

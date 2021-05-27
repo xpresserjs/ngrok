@@ -1,5 +1,6 @@
 // Import Configurations
 import Plugin from "../plugin-config";
+import net = require("net");
 // import ngrok
 import ngrok = require("ngrok");
 
@@ -45,7 +46,14 @@ export = async ([config = "default"]) => {
         { checkIfFileExists: false }
     );
 
-    $.logSuccess("Ngrok.io connected successfully.");
+    $.logSuccess("Ngrok.io connected!");
     $.logInfo(`Url: ${url}`);
     $.log("Reload your xpresser server.");
+
+    // if pingServer is enabled then ping server.
+    if (pluginConfig.get("pingServer.enabled", true)) {
+        net.createServer()
+            .on("error", () => {})
+            .listen(pluginConfig.get("pingServer.port", 9991));
+    }
 };
