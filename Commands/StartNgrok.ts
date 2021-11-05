@@ -23,7 +23,7 @@ export = async ([config = "default"]) => {
     let url;
     try {
         url = await ngrok.connect(ngrokConfig);
-    } catch (e) {
+    } catch (e: any) {
         return $.logErrorAndExit(
             e.message
                 ? e.message
