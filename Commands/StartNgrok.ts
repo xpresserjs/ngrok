@@ -1,6 +1,6 @@
 // Import Configurations
 import net from "net";
-import ngrok from  "ngrok";
+import {Ngrok, connect} from  "ngrok";
 import Plugin from "../plugin-config";
 
 
@@ -16,13 +16,13 @@ export = async ([config = "default"]) => {
         return $.logAndExit("Ngrok plugin is not enabled!");
 
     // Get required config
-    const ngrokConfig = pluginConfig.get(`config.${config}`);
+    const ngrokConfig: Ngrok.Options = pluginConfig.get(`config.${config}`);
     if (!ngrokConfig) return $.logErrorAndExit(`No config with name: ${config}`);
 
     // Require Ngrok
     let url;
     try {
-        url = await ngrok.connect(ngrokConfig);
+        url = await connect(ngrokConfig);
     } catch (e: any) {
         return $.logErrorAndExit(e);
     }
