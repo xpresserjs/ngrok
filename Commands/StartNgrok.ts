@@ -1,18 +1,18 @@
 // Import Configurations
+import net from "net";
+import ngrok from  "ngrok";
 import Plugin from "../plugin-config";
-import net = require("net");
-// import ngrok
-import ngrok = require("ngrok");
+
 
 /**
  * Start Ngrok.
- * This function runs when ever you run `xjs cli`
+ * This function runs when ever you run `xjs ngrok`
  */
 export = async ([config = "default"]) => {
     const { pluginConfig, $ } = Plugin;
 
     // Check if enabled
-    if (!Plugin.pluginConfig.get("enabled"))
+    if (!pluginConfig.get("enabled"))
         return $.logAndExit("Ngrok plugin is not enabled!");
 
     // Get required config
@@ -24,11 +24,7 @@ export = async ([config = "default"]) => {
     try {
         url = await ngrok.connect(ngrokConfig);
     } catch (e: any) {
-        return $.logErrorAndExit(
-            e.message
-                ? e.message
-                : "Error starting ngrok server, something wrong occurred!"
-        );
+        return $.logErrorAndExit(e);
     }
 
     let domain = url.replace("https://", "");

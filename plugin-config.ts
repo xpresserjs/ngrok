@@ -1,10 +1,11 @@
 import { namespace } from "./use.json";
 import importableConfig from "./exports/config";
-import { ConfigHelpers } from "@xpresser/plugin-tools";
+import {loadPluginConfig} from "@xpresser/plugin-tools/src/Config";
 
-export = ConfigHelpers.loadPluginConfig({
+export default loadPluginConfig({
     namespace,
     type: "function",
     configFile: "ngrok",
     default: importableConfig
 });
+
