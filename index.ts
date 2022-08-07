@@ -4,6 +4,8 @@ import net = require("net");
 
 export = {
     async run(aboutPlugin: any, $: DollarSign) {
+        if($.isNativeCliCommand()) return;
+
         const { pluginConfig } = Plugin;
 
         // Run if not console.
