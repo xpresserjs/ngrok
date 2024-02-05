@@ -37,7 +37,8 @@ export default ($: DollarSign): XpresserNgrokConfig => ({
      */
     config: {
         default: {
-            port: $.config.get("server.port")
+            port: $.config.get("server.port"),
+
         }
     },
 
