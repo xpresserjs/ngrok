@@ -20,14 +20,16 @@ export = async ([config = "default"]) => {
     if (!ngrokConfig) return $.logErrorAndExit(`No config with name: ${config}`);
 
     // Require Ngrok
-    let url;
+    let res;
     try {
-        url = await connect(ngrokConfig);
+        res = await connect(ngrokConfig);
     } catch (e: any) {
         return $.logErrorAndExit(e);
     }
 
-    let domain = url.url()!.replace("https://", "");
+    const url = res.url()!;
+
+    let domain = url.replace("https://", "");
 
     /**
      * Save url to ngrok.json in framework storage folder.
