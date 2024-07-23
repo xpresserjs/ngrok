@@ -1,11 +1,11 @@
 import type { DollarSign } from "xpresser/types";
-import type { Ngrok } from "ngrok";
+import type { Config } from "@ngrok/ngrok";
 
 // This Configuration Interface
 export interface XpresserNgrokConfig {
     enabled: boolean;
     modifyServerSettings: boolean;
-    config: Record<string, Ngrok.Options>;
+    config: Record<string, Config>;
     ifEnabled: (next: () => any) => any;
     pingServer: { enabled: boolean; port: number };
 }
@@ -38,7 +38,6 @@ export default ($: DollarSign): XpresserNgrokConfig => ({
     config: {
         default: {
             port: $.config.get("server.port"),
-
         }
     },
 

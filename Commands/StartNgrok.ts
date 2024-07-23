@@ -1,6 +1,6 @@
 // Import Configurations
 import net from "net";
-import {Ngrok, connect} from  "ngrok";
+import {Config, connect} from  "@ngrok/ngrok";
 import Plugin from "../plugin-config";
 
 
@@ -16,7 +16,7 @@ export = async ([config = "default"]) => {
         return $.logAndExit("Ngrok plugin is not enabled!");
 
     // Get required config
-    const ngrokConfig: Ngrok.Options = pluginConfig.get(`config.${config}`);
+    const ngrokConfig: Config = pluginConfig.get(`config.${config}`);
     if (!ngrokConfig) return $.logErrorAndExit(`No config with name: ${config}`);
 
     // Require Ngrok
@@ -27,7 +27,7 @@ export = async ([config = "default"]) => {
         return $.logErrorAndExit(e);
     }
 
-    let domain = url.replace("https://", "");
+    let domain = url.url()!.replace("https://", "");
 
     /**
      * Save url to ngrok.json in framework storage folder.
